@@ -1,2 +1,7 @@
 // Normalized playback types for Spotify
-// ...implementation will go here...
+export interface SpotifyTrack {
+  id: string;
+  durationMs: number;
+  progressMs: number;
+  isPlaying: boolean;
+}

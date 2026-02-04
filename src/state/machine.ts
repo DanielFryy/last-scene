@@ -1,5 +1,5 @@
 import { createActor, setup } from "xstate";
-import { LastSceneEvent } from "./machine.types";
+import type { LastSceneEvent } from "./types";
 
 const createLastSceneMachine = (stopStream: () => void) => {
   return setup({
