@@ -1,6 +1,6 @@
 import { describe, expect, it, mock } from "bun:test";
-import type { OBSClient } from "./types";
-import { createObsControl } from "./control";
+import type { OBSClient } from "../../obs/types";
+import { createObsControl } from "../../obs/control";
 
 describe("createObsControl", () => {
   it("calls StopStream when stream is active", async () => {

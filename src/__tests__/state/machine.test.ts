@@ -1,5 +1,5 @@
 import { describe, it, expect, mock } from "bun:test";
-import { createLastSceneActor } from "./machine";
+import { createLastSceneActor } from "../../state/machine";
 
 describe("lastScene state machine", () => {
   it("starts in idle", () => {

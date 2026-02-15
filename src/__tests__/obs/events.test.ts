@@ -1,6 +1,6 @@
 import { describe, expect, it, mock } from "bun:test";
-import type { OBSClient } from "./types";
-import { registerObsEvents } from "./events";
+import type { OBSClient } from "../../obs/types";
+import { registerObsEvents } from "../../obs/events";
 
 const createObsStub = () => {
   let handler: ((sceneName: string) => void) | null = null;
