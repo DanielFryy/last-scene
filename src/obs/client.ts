@@ -1,8 +1,7 @@
 import OBSWebSocket, { EventSubscription } from "obs-websocket-js";
+import type { OBSClient } from "./types";
 
-export type OBSConnection = ReturnType<typeof createOBSClient>;
-
-export const createOBSClient = () => {
+export const createOBSClient = (): OBSClient => {
   const obs = new OBSWebSocket();
 
   const connect = async () => {
@@ -11,13 +10,17 @@ export const createOBSClient = () => {
     await obs.connect(address, password, {
       eventSubscriptions: EventSubscription.Scenes
     });
-  }
+  };
 
   const onSceneChange = (callback: (sceneName: string) => void) => {
     obs.on("CurrentProgramSceneChanged", data => {
       callback(data.sceneName);
     });
-  }
+  };
 
-  return { connect, onSceneChange };
-}
+  const call: OBSClient["call"] = (requestType, requestData) => {
+    return obs.call(requestType, requestData);
+  };
+
+  return { connect, onSceneChange, call };
+};
