@@ -5,3 +5,8 @@ export interface SpotifyTrack {
   progressMs: number;
   isPlaying: boolean;
 }
+
+export interface PollCurrentTrackConfig {
+  onTrackChange: (track: SpotifyTrack | null) => void;
+  intervalMs?: number;
+}

@@ -1,13 +1,8 @@
 import { getCurrentPlayback } from "./client";
-import type { SpotifyTrack } from "./types";
+import type { PollCurrentTrackConfig as Config, SpotifyTrack } from "./types";
 
-export const pollCurrentTrack = ({
-  onTrackChange,
-  intervalMs = 1000
-}: {
-  onTrackChange: (track: SpotifyTrack | null) => void;
-  intervalMs?: number;
-}) => {
+export const pollCurrentTrack = (config: Config) => {
+  const { onTrackChange, intervalMs = 1500 } = config;
   let lastTrackId: string | null = null;
   let intervalId: NodeJS.Timeout | null = null;
 

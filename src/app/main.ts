@@ -1,16 +1,18 @@
-const abort = new AbortController();
+import { createOBSClient } from "../obs/client";
+import "./config";
 
-obs.onEndingScene(() => {
-  state.onEndingSceneEntered();
-  startSpotifyPolling({ signal: abort.signal, ... });
-});
-
-obs.onExitEnding(() => {
-  abort.abort();
-  state.reset();
-});
-
-spotify.onPlayback((playback) => {
-  // feed state machine
-  // if machine says "true" → obs.stopStream()
-});
+export const main = async () => {
+  console.log("App started. Testing OBS client");
+  const obs = createOBSClient();
+  const address = process.env.OBS_ADDRESS;
+  try {
+    await obs.connect();
+    console.log("Connected to OBS at", address);
+    obs.onSceneChange(sceneName => {
+      console.log("Scene changed to:", sceneName);
+    });
+    console.log("Listening for scene changes...");
+  } catch (err) {
+    console.error("Failed to connect to OBS:", err);
+  }
+};
